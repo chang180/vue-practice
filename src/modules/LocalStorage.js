@@ -3,7 +3,7 @@
 export default function(KEY) {
     return {
         load() {
-            JSON.parse(window.localStorage.getItem(KEY) || 'null')
+            return JSON.parse(window.localStorage.getItem(KEY) || 'null')
         },
         // eslint-disable-next-line space-before-function-paren
         save(data) {
