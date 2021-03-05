@@ -5,6 +5,11 @@
 <template>
   <div class="todo">
     <h1>This is a Todo page</h1>
+    <router-link to="/todo" replace>All</router-link>|
+    <router-link to="/todo?filter=active" replace>Active</router-link>|
+    <router-link :to="{ name: 'Todo', query: { filter: 'done' } }" replace
+      >Done</router-link
+    >|
     <p>show:{{ filter }}</p>
     <div>{{ list }}</div>
   </div>
@@ -19,6 +24,18 @@ export default {
   computed: {
     list () {
       return this.$store.getters.filterList(this.filter)
+    }
+  },
+  watch: {
+    // $route: function (route) {
+    //   // check query
+    //   this.filter = route.query.filter || 'all'
+    // }
+    $route: {
+      immediate: true,
+      handler: function (route) {
+        this.filter = route.query.filter || 'all'
+      }
     }
   }
 }
