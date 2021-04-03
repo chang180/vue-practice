@@ -8,7 +8,7 @@ space-before-blocks */
     <router-link to="/todo?filter=active" replace>Active</router-link>｜
     <router-link :to="{ name: 'Todo', query: { filter: 'done' } }" replace
       >Done </router-link
-    >｜
+    >
     <p>show:{{ filter }}</p>
     <div>{{ list }}</div>
   </div>
@@ -40,3 +40,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+.todo a{
+  text-decoration: none;
+  color: black;
+}
+.todo .router-link-exact-active{
+color: green;
+font-weight:bolder;
+}
+
+</style>
