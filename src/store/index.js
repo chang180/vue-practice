@@ -11,7 +11,7 @@ const STORE = new LocalStorage('todo-vue')
 
 export default new Vuex.Store({
     state: {
-        todos: [{ content: 123, done: false }, { content: 456, done: false }, { content: 789, done: false }]
+        todos: [{ content: 123, done: false }, { content: 456, done: true }, { content: 789, done: false }]
     },
     getters: {
         list(state) {
