@@ -12,6 +12,7 @@ const STORE = new LocalStorage('todo-vue')
 export default new Vuex.Store({
     state: {
         todos: [{ content: 123, done: false }, { content: 456, done: true }, { content: 789, done: false }]
+            // todos: []
     },
     getters: {
         list(state) {
@@ -71,19 +72,35 @@ export default new Vuex.Store({
                 todos
             }
         },
-        UPDATE_TODO({ commit }, { tId, todo }) {
+        UPDATE_TODO({ commit, state }, { tId, content }) {
             // 1. PATCH axios.patch()
+            if (state.todos[tId].content === content) return
+            console.log('API')
             const todos = STORE.load()
-                // todo[tId].content = content
-            todos.splice(tId, 1, todo)
+            todos[tId].content = content
+                // todos.splice(tId, 1, todo)
             STORE.save(todos)
                 // 2. commit mutation
             commit('SET_TODOS', todos)
                 // 3. return
             return {
                 tId,
-                todo
-                // todo: todos[tId],
+                todo: todos[tId]
+            }
+        },
+        CHECK_TODO({ commit }, { tId, done }) {
+            // 1. PATCH axios.patch()
+            const todos = STORE.load()
+                // console.log(todos[tId])
+                // todo[tId].content = content
+            todos[tId].done = done
+            STORE.save(todos)
+                // 2. commit mutation
+            commit('SET_TODOS', todos)
+                // 3. return
+            return {
+                tId,
+                todo: todos[tId]
             }
         },
         DELETE_TODO({ commit }, { tId }) {
