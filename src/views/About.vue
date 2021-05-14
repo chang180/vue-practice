@@ -80,6 +80,7 @@ export default {
   flex: calc(25% - 20px) 0 0;
   margin: 10px;
   z-index: 1;
+  background:lightgrey;
 }
 .card-slider-item:first-child,
 .card-slider-item:last-child {
@@ -92,5 +93,42 @@ img {
 }
 .flip-list-move {
   transition: transform 1s;
+}
+
+@media(max-width:720px){
+  .card-slider {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+.card-slider-items {
+  display: flex;
+  width: 100%;
+  margin-left: calc(-1 * 33% * 1.5);
+}
+.card-slider-item {
+  flex: calc(33% - 20px) 0 0;
+  margin: 10px;
+  z-index: 1;
+  background:lightgrey;
+}
+}
+@media(max-width:360px){
+  .card-slider {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+.card-slider-items {
+  display: flex;
+  width: 100%;
+  margin-left: calc(-1 * 50% *.5);
+}
+.card-slider-item {
+  flex: calc( 50% - 20px) 0 0;
+  margin: 10px;
+  z-index: 1;
+  background:lightgrey;
+}
 }
 </style>
