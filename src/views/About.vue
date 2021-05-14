@@ -1,8 +1,10 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
+    <button @click="change(now - 1)">Prev</button>
+    <button @click="change(now + 1)">Next</button>
     <div class="card-slider">
-      <transition-group class="card-slider-items">
+      <transition-group class="card-slider-items" name="flip-list">
         <div
           class="card-slider-item"
           v-for="item of showImages"
@@ -54,6 +56,12 @@ export default {
 
       return this.allImages.slice(start).concat(this.allImages.slice(0, start))
     }
+  },
+  methods: {
+    change (index) {
+      const limit = this.allImages.length - 1
+      this.now = index < 0 ? limit : index > limit ? 0 : index
+    }
   }
 }
 </script>
@@ -71,8 +79,18 @@ export default {
 .card-slider-item {
   flex: calc(25% - 20px) 0 0;
   margin: 10px;
+  z-index: 1;
 }
-img{
+.card-slider-item:first-child,
+.card-slider-item:last-child {
+  z-index: -1;
+  visibility: hidden;
+  /* opacity:0; */
+}
+img {
   width: 100%;
+}
+.flip-list-move {
+  transition: transform 1s;
 }
 </style>
