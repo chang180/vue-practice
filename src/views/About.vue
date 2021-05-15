@@ -82,8 +82,8 @@ export default {
   z-index: 1;
   background: lightgrey;
 }
-.card-slider-item:first-child,
-.card-slider-item:last-child {
+.card-slider-item:nth-child(-n + 2),
+.card-slider-item:nth-last-child(-n + 2) {
   z-index: -1;
   visibility: hidden;
   /* opacity:0; */
