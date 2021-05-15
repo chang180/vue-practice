@@ -10,6 +10,7 @@
           v-for="item of showImages"
           :key="item.id"
           :data-id="item.id"
+          @click="change(Number(item.id[0] * 5) + Number(item.id[2] - 1))"
         >
           <img :src="item.src" />
         </div>
@@ -53,7 +54,6 @@ export default {
     },
     showImages () {
       const start = this.now - 4
-
       return this.allImages.slice(start).concat(this.allImages.slice(0, start))
     }
   },
@@ -61,7 +61,6 @@ export default {
     change (index) {
       const limit = this.allImages.length - 1
       this.now = index < 0 ? limit : index > limit ? 0 : index
-      console.log(index)
     }
   }
 }
@@ -81,7 +80,7 @@ export default {
   flex: calc(25% - 20px) 0 0;
   margin: 10px;
   z-index: 1;
-  background:lightgrey;
+  background: lightgrey;
 }
 .card-slider-item:first-child,
 .card-slider-item:last-child {
@@ -96,40 +95,40 @@ img {
   transition: transform 1s;
 }
 
-@media(max-width:720px) and (min-width:360px){
+@media (max-width: 720px) and (min-width: 360px) {
   .card-slider {
-  display: flex;
-  width: 100%;
-  overflow: hidden;
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+  }
+  .card-slider-items {
+    display: flex;
+    width: 100%;
+    margin-left: calc(-1 * 50% * 3.5);
+  }
+  .card-slider-item {
+    flex: calc(50% - 20px) 0 0;
+    margin: 10px;
+    z-index: 1;
+    background: lightgrey;
+  }
 }
-.card-slider-items {
-  display: flex;
-  width: 100%;
-  margin-left: calc(-1 * 50% * 3.5);
-}
-.card-slider-item {
-  flex: calc(50% - 20px) 0 0;
-  margin: 10px;
-  z-index: 1;
-  background:lightgrey;
-}
-}
-@media(max-width:360px){
+@media (max-width: 360px) {
   .card-slider {
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-}
-.card-slider-items {
-  display: flex;
-  width: 100%;
-  margin-left: calc(-1 * 100% * 4);
-}
-.card-slider-item {
-  flex: calc( 100% - 20px) 0 0;
-  margin: 10px;
-  z-index: 1;
-  background:lightgrey;
-}
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+  }
+  .card-slider-items {
+    display: flex;
+    width: 100%;
+    margin-left: calc(-1 * 100% * 4);
+  }
+  .card-slider-item {
+    flex: calc(100% - 20px) 0 0;
+    margin: 10px;
+    z-index: 1;
+    background: lightgrey;
+  }
 }
 </style>
