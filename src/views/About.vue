@@ -61,6 +61,7 @@ export default {
     change (index) {
       const limit = this.allImages.length - 1
       this.now = index < 0 ? limit : index > limit ? 0 : index
+      console.log(index)
     }
   }
 }
@@ -95,7 +96,7 @@ img {
   transition: transform 1s;
 }
 
-@media(max-width:720px){
+@media(max-width:720px) and (min-width:360px){
   .card-slider {
   display: flex;
   width: 100%;
@@ -104,10 +105,10 @@ img {
 .card-slider-items {
   display: flex;
   width: 100%;
-  margin-left: calc(-1 * 33% * 1.5);
+  margin-left: calc(-1 * 50% * 3.5);
 }
 .card-slider-item {
-  flex: calc(33% - 20px) 0 0;
+  flex: calc(50% - 20px) 0 0;
   margin: 10px;
   z-index: 1;
   background:lightgrey;
@@ -122,10 +123,10 @@ img {
 .card-slider-items {
   display: flex;
   width: 100%;
-  margin-left: calc(-1 * 50% *.5);
+  margin-left: calc(-1 * 100% * 4);
 }
 .card-slider-item {
-  flex: calc( 50% - 20px) 0 0;
+  flex: calc( 100% - 20px) 0 0;
   margin: 10px;
   z-index: 1;
   background:lightgrey;
