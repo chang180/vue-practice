@@ -3,10 +3,11 @@
     <h1>This is an about page</h1>
     <button @click="change(now - 1)">Prev</button>
     <button @click="change(now + 1)">Next</button>
-    <div class="card-slider">
+    <div class="card-slider swiper-container">
+        <div class="swiper-wrapper">
       <transition-group class="card-slider-items" name="flip-list">
         <div
-          class="card-slider-item"
+          class="card-slider-item swiper-slide"
           v-for="item of showImages"
           :key="item.id"
           :data-id="item.id"
@@ -15,6 +16,7 @@
           <img :src="item.src" />
         </div>
       </transition-group>
+        </div>
     </div>
   </div>
 </template>
@@ -66,6 +68,10 @@ export default {
 }
 </script>
 <style scoped>
+.swiper-container {
+  width: 1200px;
+  height: 720px;
+}
 .card-slider {
   display: flex;
   width: 100%;
