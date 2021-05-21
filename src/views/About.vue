@@ -4,14 +4,17 @@
     <template v-if="disSelect != null">
       {{ districts[disSelect].zip }}
     </template>
+    <!-- <select v-model="cityComputed"> -->
     <select v-model="citySelect">
-      <option value="null">請選擇</option>
+      <template v-if="citySelect === null">
+      <option :value="null">請選擇</option>
+      </template>
       <option v-for="(city, index) of cities" :value="index" :key="city">{{
         city
       }}</option>
     </select>
     <select v-model="disSelect">
-      <option value="null">請選擇</option>
+      <option :value="null">請選擇</option>
       <!-- <option v-for="dis of districts" :value="dis.zip" :key="dis.name">{{ -->
       <option
         v-for="(dis, index) of districts"
@@ -23,26 +26,50 @@
   </div>
 </template>
 <script>
-const postData = require('@/assets/post.json')
+const postDataCH = require('@/assets/post.json')
+const postDataEN = require('@/assets/postEN.json')
 export default {
   data () {
     return {
+      lang: 0, // 0=>中文, 1=>英文
       citySelect: null,
       disSelect: null
     }
   },
   computed: {
+    postData () {
+      return this.lang === 0 ? postDataCH : postDataEN
+    },
+    // cityComputed: {
+    //   get () {
+    //     return this.citySelect
+    //   },
+    //   set (val) {
+    //     // this.disSelect = null
+    //     if (this.disSelect >= postData[val].districts.length) { this.disSelect = 0 }
+    //     this.citySelect = val
+    //   }
+    // },
     cities () {
-      return postData.map(item => {
+      return this.postData.map(item => {
         return item.name
       })
     },
     districts () {
       let districts = []
       if (this.citySelect !== null) {
-        districts = postData[this.citySelect].districts
+        districts = this.postData[this.citySelect].districts
       }
       return districts
+    }
+  },
+  watch: {
+    citySelect (nVal, oVal) {
+      // console.log(nVal, postData[this.citySelect].districts.length)
+      // this.disSelect = null
+      if (this.disSelect >= this.postData[this.citySelect].districts.length) {
+        this.disSelect = 0
+      }
     }
   }
 }
